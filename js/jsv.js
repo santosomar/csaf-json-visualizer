@@ -1,12 +1,12 @@
-//fix for IE
+
 if (!window.location.origin) {
   window.location.origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
 }
 
-
 if (typeof JSV === 'undefined') {
     /**
-     * JSV namespace for JSON Schema Viewer.
+     * I am using the JSV namespace for JSON Schema Viewer.
+     * this code is like Frankeinstein (don't judge) ;-)
      * @namespace
      */
     var JSV = {
