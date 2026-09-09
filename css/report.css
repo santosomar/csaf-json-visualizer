@@ -1,0 +1,473 @@
+/* Advisory report: header, vulnerability cards, VEX matrix, product tree. */
+.report {
+  padding: var(--space-5);
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.report-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-5);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.report-tab {
+  padding: 6px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  cursor: pointer;
+}
+.report-tab:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.report-tab.active {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+/* ---------- Header ---------- */
+.adv-header {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-3);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-1);
+}
+
+.adv-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-2);
+  line-height: 1.25;
+}
+
+.adv-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.adv-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3) var(--space-5);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.meta-item .label {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  font-weight: 700;
+}
+.meta-item .value {
+  font-size: var(--fs-md);
+  word-break: break-word;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+  color: var(--text-muted);
+}
+
+.badge.tlp-red {
+  background: #000;
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+}
+.badge.tlp-amber {
+  background: #000;
+  color: #ffbf00;
+  border-color: #ffbf00;
+}
+.badge.tlp-green {
+  background: #000;
+  color: #33ff77;
+  border-color: #33ff77;
+}
+.badge.tlp-white,
+.badge.tlp-clear {
+  background: #fff;
+  color: #000;
+  border-color: #999;
+}
+
+.badge.sev-critical {
+  background: var(--sev-critical);
+  color: #fff;
+  border-color: transparent;
+}
+.badge.sev-high {
+  background: var(--sev-high);
+  color: #fff;
+  border-color: transparent;
+}
+.badge.sev-medium {
+  background: var(--sev-medium);
+  color: #fff;
+  border-color: transparent;
+}
+.badge.sev-low {
+  background: var(--sev-low);
+  color: #fff;
+  border-color: transparent;
+}
+.badge.sev-none {
+  background: var(--sev-none);
+  color: #fff;
+  border-color: transparent;
+}
+.badge.version {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* ---------- Vulnerability cards ---------- */
+.vuln-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+
+.vuln-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.vuln-cve {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+}
+
+.vuln-title {
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 200px;
+}
+
+.vuln-body {
+  padding: var(--space-4) var(--space-5);
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
+}
+
+.vuln-section h4 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+.score-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  background: var(--bg-sunken);
+}
+
+.score-num {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1;
+}
+.score-num.sev-critical {
+  color: var(--sev-critical);
+}
+.score-num.sev-high {
+  color: var(--sev-high);
+}
+.score-num.sev-medium {
+  color: var(--sev-medium);
+}
+.score-num.sev-low {
+  color: var(--sev-low);
+}
+.score-num.sev-none {
+  color: var(--sev-none);
+}
+
+.score-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.score-meta .ver {
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+.score-meta .vec {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  word-break: break-all;
+  max-width: 320px;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-1);
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+  font-size: var(--fs-sm);
+}
+
+.pill .k {
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+}
+
+.rem-group {
+  margin-bottom: var(--space-3);
+}
+.rem-cat {
+  display: inline-block;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-1);
+}
+.rem-item {
+  padding: var(--space-2) 0;
+  border-top: 1px dashed var(--border);
+  font-size: var(--fs-sm);
+}
+
+.note-block {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--border-strong);
+  background: var(--bg-sunken);
+  border-radius: 0 var(--radius-1) var(--radius-1) 0;
+  margin-bottom: var(--space-2);
+}
+.note-block .note-title {
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+.note-block .note-cat {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+.note-block p {
+  margin: var(--space-1) 0 0;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.ref-list,
+.plain-list {
+  margin: 0;
+  padding-left: var(--space-4);
+  line-height: 1.6;
+}
+.ref-list li {
+  word-break: break-word;
+}
+
+.product-link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+.product-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- VEX matrix ---------- */
+.matrix-controls {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.matrix-scroll {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  background: var(--bg-elevated);
+}
+
+table.matrix {
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  width: 100%;
+}
+
+table.matrix th,
+table.matrix td {
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  white-space: nowrap;
+}
+
+table.matrix thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-sunken);
+  z-index: 2;
+  font-size: var(--fs-xs);
+}
+
+table.matrix tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--bg-elevated);
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table.matrix tbody tr.hl th,
+table.matrix tbody tr.hl td {
+  background: var(--accent-soft);
+}
+
+.status-cell {
+  text-align: center !important;
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  cursor: default;
+}
+
+.status-cell.st-fixed {
+  background: color-mix(in srgb, var(--st-fixed) 22%, transparent);
+  color: var(--st-fixed);
+}
+.status-cell.st-affected {
+  background: color-mix(in srgb, var(--st-affected) 22%, transparent);
+  color: var(--st-affected);
+}
+.status-cell.st-not-affected {
+  background: color-mix(in srgb, var(--st-not-affected) 22%, transparent);
+  color: var(--st-not-affected);
+}
+.status-cell.st-investigating {
+  background: color-mix(in srgb, var(--st-investigating) 22%, transparent);
+  color: var(--st-investigating);
+}
+.status-cell.st-recommended {
+  background: color-mix(in srgb, var(--st-recommended) 22%, transparent);
+  color: var(--st-recommended);
+}
+.status-cell.st-unknown {
+  color: var(--st-unknown);
+}
+
+.matrix-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.matrix-legend .sw {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: -2px;
+}
+
+/* ---------- Product tree summary ---------- */
+.pt-stats {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+.pt-stat {
+  text-align: center;
+}
+.pt-stat .n {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--accent);
+}
+.pt-stat .l {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.section-title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Give the product-tree tab a definite height so the d3 canvas can fill it. */
+.report .tree-wrap {
+  height: calc(100vh - 180px);
+  min-height: 420px;
+}
+

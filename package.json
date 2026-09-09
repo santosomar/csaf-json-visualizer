@@ -1,0 +1,18 @@
+{
+  "name": "csaf-json-visualizer",
+  "version": "2.0.0",
+  "description": "Zero-build, self-hosted viewer and validator for OASIS CSAF 2.0/2.1 security advisories and JSON schemas.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "serve": "node tools/serve.mjs",
+    "update:schemas": "bash tools/update-schemas.sh",
+    "update:vendor": "bash tools/update-vendor.sh"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/santosomar/csaf-json-visualizer"
+  }
+}
